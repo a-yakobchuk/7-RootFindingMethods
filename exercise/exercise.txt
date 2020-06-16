@@ -1,0 +1,77 @@
+2) voltage constants are of type double that's why they contain the decimal
+    It was 2.0 instead of 2 because it's of type double and yes it matters
+    because it needs a more exact number for the standard error calculation.
+
+iter:0	a:0.000000	b:50.000000	x:25.000000	err:25.000000
+iter:1	a:25.000000	b:50.000000	x:37.500000	err:12.500000
+iter:2	a:25.000000	b:37.500000	x:31.250000	err:6.250000
+iter:3	a:31.250000	b:37.500000	x:34.375000	err:3.125000
+iter:4	a:34.375000	b:37.500000	x:35.937500	err:1.562500
+iter:5	a:34.375000	b:35.937500	x:35.156250	err:0.781250
+iter:6	a:35.156250	b:35.937500	x:35.546875	err:0.390625
+iter:7	a:35.546875	b:35.937500	x:35.742188	err:0.195312
+iter:8	a:35.546875	b:35.742188	x:35.644531	err:0.097656
+iter:9	a:35.644531	b:35.742188	x:35.693359	err:0.048828
+iter:10	a:35.644531	b:35.693359	x:35.668945	err:0.024414
+iter:11	a:35.668945	b:35.693359	x:35.681152	err:0.012207
+Bisection returned root: 35.687256
+
+3) a and b are the "bracket" values aka the guess roots
+4) the motor function really has 3 roots because it is to the power of 3
+5) my approach to find the other roots was to change the values of a and b
+    first I used values of 50 and 100 to find a root of 52.630615
+ 
+iter:0	a:50.000000	b:100.000000	x:75.000000	err:25.000000
+iter:1	a:50.000000	b:75.000000	x:62.500000	err:12.500000
+iter:2	a:50.000000	b:62.500000	x:56.250000	err:6.250000
+iter:3	a:50.000000	b:56.250000	x:53.125000	err:3.125000
+iter:4	a:50.000000	b:53.125000	x:51.562500	err:1.562500
+iter:5	a:51.562500	b:53.125000	x:52.343750	err:0.781250
+iter:6	a:52.343750	b:53.125000	x:52.734375	err:0.390625
+iter:7	a:52.343750	b:52.734375	x:52.539062	err:0.195312
+iter:8	a:52.539062	b:52.734375	x:52.636719	err:0.097656
+iter:9	a:52.539062	b:52.636719	x:52.587891	err:0.048828
+iter:10	a:52.587891	b:52.636719	x:52.612305	err:0.024414
+iter:11	a:52.612305	b:52.636719	x:52.624512	err:0.012207
+Bisection returned root: 52.630615
+
+    then I tried to see if there was a negative root by using values 
+    of -80.0 and 0.0 anf got a root of -50.810547
+
+iter:0	a:-80.000000	b:0.000000	x:-40.000000	err:40.000000
+iter:1	a:-80.000000	b:-40.000000	x:-60.000000	err:20.000000
+iter:2	a:-60.000000	b:-40.000000	x:-50.000000	err:10.000000
+iter:3	a:-60.000000	b:-50.000000	x:-55.000000	err:5.000000
+iter:4	a:-55.000000	b:-50.000000	x:-52.500000	err:2.500000
+iter:5	a:-52.500000	b:-50.000000	x:-51.250000	err:1.250000
+iter:6	a:-51.250000	b:-50.000000	x:-50.625000	err:0.625000
+iter:7	a:-51.250000	b:-50.625000	x:-50.937500	err:0.312500
+iter:8	a:-50.937500	b:-50.625000	x:-50.781250	err:0.156250
+iter:9	a:-50.937500	b:-50.781250	x:-50.859375	err:0.078125
+iter:10	a:-50.859375	b:-50.781250	x:-50.820312	err:0.039062
+iter:11	a:-50.820312	b:-50.781250	x:-50.800781	err:0.019531
+Bisection returned root: -50.810547
+
+NEWTON
+
+2) the derivative of the motor function is f'(v)=52.2 + 2*0.75v - 3*0.02*v*v
+   it is needed because it is the slope of the original function and the
+   slope is used for the guesses to narrow down what the root actually is
+   and the direction of the root i.e. left or right
+
+iter:0	x0:1.000000	x1:35.602349	err:34.602349
+iter:1	x0:35.602349	x1:35.685284	err:0.082935
+Newton returned root: 35.685610
+
+3) Newton found the same root as bisection, they were only off by a fraction
+   newton was 35.685610 and bisection was 35.687256
+
+guess changed to 30.0...
+
+iter:0	x0:30.000000	x1:34.814815	err:4.814815
+iter:1	x0:34.814815	x1:35.653164	err:0.838349
+iter:2	x0:35.653164	x1:35.685560	err:0.032396
+Newton returned root: 35.685610
+
+5) Newton found the same root with a guess of 30.0
+6) bisection uses more iterations to find the same root, newton uses less

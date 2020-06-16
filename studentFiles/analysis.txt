@@ -1,0 +1,92 @@
+Anita Yakobchuk
+Analysis lab07
+
+
+Some things I needed to change for it to calculate the root correctly was
+that in eqn2solve.c I needed to change integers to doubles (like 10 to 10.0) 
+when dividing and doing other math because if there was no decimal it treated
+it as int and will do answer as an int  but it needed a double to be correct.
+In hw7.c I had to change case statements for float arguments from atoi to 
+atof because atof handles doubles. In the hw7.c file I had to change where 
+the timing macros were places so that they suuounded only the root finding 
+function call. In the Makefile I changed things like verbose into a macro 
+and most thing that were able to be changed to macro variables. In the
+rootfinding.c file I added print statements and changed where they are placed
+to be printed for each iteration of the methods.  
+
+TIMING AND OPTIMIZATION
+For testing the program, the gcc -O3 option because I tested each rootfinding
+method with the -01 and -03 and the timing results were slightly faster with 
+-03. When I ran the timing macros for bisection with -01 the repeat timer was 
+about 9.9e-06 each time and for -03 it was about 9.75e-06 each time. 
+I expected this since -03 is full optimization with aggresive lining and 
+vectorization and -01 is only moderate optimization. 
+
+
+TIMING AVERAGES FOR 200000 LOOPS AND 5 ITERATIONS:
+
+Bisection: [-2.5,2.5] 
+The root was found at 1.991137 which was expected.
+Average elapsed timer: 1.93e+00
+Average repeat timer: 9.97e-06 
+
+Newton: 1.5
+Found the root at 1.991137 which was expected and the same as bisection.
+Average elapsed timer: 9.98e-01
+Average repeat timer: 4.99e-06
+
+Secant: [1.5,1.6]
+Found the root at 1.991137 which was expected and matches with the other methods.
+Average elapsed timer: 9.38e-01
+Average repeat timer: 4.69e-06
+
+Bisection result of [-2.5,2.5]
+
+iter:0	a:-2.500000	b:2.500000	x:0.000000	err:2.500000
+iter:1	a:0.000000	b:2.500000	x:1.250000	err:1.250000
+iter:2	a:1.250000	b:2.500000	x:1.875000	err:0.625000
+iter:3	a:1.875000	b:2.500000	x:2.187500	err:0.312500
+iter:4	a:1.875000	b:2.187500	x:2.031250	err:0.156250
+iter:5	a:1.875000	b:2.031250	x:1.953125	err:0.078125
+iter:6	a:1.953125	b:2.031250	x:1.992188	err:0.039062
+iter:7	a:1.953125	b:1.992188	x:1.972656	err:0.019531
+iter:8	a:1.972656	b:1.992188	x:1.982422	err:0.009766
+iter:9	a:1.982422	b:1.992188	x:1.987305	err:0.004883
+iter:10	a:1.987305	b:1.992188	x:1.989746	err:0.002441
+iter:11	a:1.989746	b:1.992188	x:1.990967	err:0.001221
+iter:12	a:1.990967	b:1.992188	x:1.991577	err:0.000610
+iter:13	a:1.990967	b:1.991577	x:1.991272	err:0.000305
+iter:14	a:1.990967	b:1.991272	x:1.991119	err:0.000153
+iter:15	a:1.991119	b:1.991272	x:1.991196	err:0.000076
+iter:16	a:1.991119	b:1.991196	x:1.991158	err:0.000038
+iter:17	a:1.991119	b:1.991158	x:1.991138	err:0.000019
+iter:18	a:1.991119	b:1.991138	x:1.991129	err:0.000010
+iter:19	a:1.991129	b:1.991138	x:1.991134	err:0.000005
+iter:20	a:1.991134	b:1.991138	x:1.991136	err:0.000002
+iter:21	a:1.991136	b:1.991138	x:1.991137	err:0.000001
+Found root: 1.991137 using bisection
+
+Newton result of 1.5
+iter:0	x0:1.500000	x1:2.142724	err:0.642724
+iter:1	x0:2.142724	x1:1.995130	err:0.147594
+iter:2	x0:1.995130	x1:1.991141	err:0.003990
+iter:3	x0:1.991141	x1:1.991137	err:0.000004
+Found root: 1.991137 using newton
+
+Secant result of [1.5,1.6]
+iter:0	x0:1.500000	x2:1.600000	err:0.600334
+iter:1	x0:2.100334	x2:1.500000	err:0.128284
+iter:2	x0:1.972049	x2:2.100334	err:0.018623
+iter:3	x0:1.990673	x2:1.972049	err:0.000467
+iter:4	x0:1.991139	x2:1.990673	err:0.000002
+iter:5	x0:1.991137	x2:1.991139	err:0.000000
+Found root: 1.991137 using secant
+
+All the methods found the same root but secant was the quickest according
+to the timing results. Newton needed the least amount of iterations and 
+bisection had the most amount of iterations since it takes the function to be
+evaluated, finds the midpoint, checks if its a root and keeps evaluating if 
+its not a valid root. Newton usese the function and its derivative. Secant 
+uses the function and a second guess. The timings made sense for their 
+implementations.  
+
